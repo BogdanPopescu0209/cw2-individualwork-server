@@ -47,3 +47,14 @@ app.post('/collection/:collectionName', (request, response, next) => {
         response.send(results)
     })
 })
+
+app.put('/collection/:collectionName/:id', (request, response, next) => {
+    request.collection.update(
+        { _id: new ObjectID(request.params.id) },
+        { $set: request.body },
+        { safe: true, multi: false },
+        (error, result) => {
+            if (error) return next(error)
+            response.send(result.acknowledged == true ? {msg: 'success'} : {msg: 'error'})
+        })
+})
