@@ -30,16 +30,16 @@ app.use(function (request, response, next) {
     next()
 })
 
-app.use(function (req, res, next) {
+app.use(function (request, response, next) {
 
     var filePath = path.join(__dirname, "static", req.url);
 
-    fs.stat(filePath, function (err, fileInfo) {
-        if (err) {
+    fs.stat(filePath, function (error, fileInfo) {
+        if (error) {
             next();
             return;
         }
-        if (fileInfo.isFile()) res.sendFile(filePath);
+        if (fileInfo.isFile()) response.sendFile(filePath);
         else next();
     });
 });
