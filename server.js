@@ -29,3 +29,7 @@ app.use(function (request, response, next) {
 })
 
 app.use(express.static('public'))
+
+app.get('/', (request, response, next) => {
+    response.send('Welcome to express server!')
+})
