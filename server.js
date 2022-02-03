@@ -27,3 +27,5 @@ app.use(function (request, response, next) {
     console.log('Request date: ' + new Date())
     next()
 })
+
+app.use(express.static('public'))
