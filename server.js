@@ -44,6 +44,19 @@ app.use(function (request, response, next) {
     });
 });
 
+app.get('/images', (request, response, next) => {
+        var filePath = path.join(__dirname, "static", request.url);
+
+    fs.stat(filePath, function (error, fileInfo) {
+        if (error) {
+            next();
+            return;
+        }
+        if (fileInfo.isFile()) response.sendFile(filePath);
+        else next();
+    });
+})
+
 app.get('/', (request, response, next) => {
     response.send('Welcome to express server!')
 })
