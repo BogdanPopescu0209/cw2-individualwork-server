@@ -32,7 +32,7 @@ app.use(function (request, response, next) {
 
 app.use(function (request, response, next) {
 
-    var filePath = path.join(__dirname, "static", req.url);
+    var filePath = path.join(__dirname, "static", request.url);
 
     fs.stat(filePath, function (error, fileInfo) {
         if (error) {
