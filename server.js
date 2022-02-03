@@ -93,4 +93,4 @@ app.get('/search/:collectionName/:searchItem', (request, response, next) => {
     })
 })
 
-app.listen(8000);
+app.listen(process.env.PORT);
