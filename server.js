@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const ObjectID = require('mongodb').ObjectId;
 const cors = require('cors');
+var path = require("path");
+var fs = require("fs");
 app.use(cors());
 app.use(express.json());
 
@@ -28,7 +30,19 @@ app.use(function (request, response, next) {
     next()
 })
 
-app.use(express.static('public'))
+app.use(function (req, res, next) {
+
+    var filePath = path.join(__dirname, "public", req.url);
+
+    fs.stat(filePath, function (err, fileInfo) {
+        if (err) {
+            next();
+            return;
+        }
+        if (fileInfo.isFile()) res.sendFile(filePath);
+        else next();
+    });
+});
 
 app.get('/', (request, response, next) => {
     response.send('Welcome to express server!')
