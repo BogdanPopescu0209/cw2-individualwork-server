@@ -40,3 +40,10 @@ app.get('/collection/:collectionName', (request, response, next) => {
         response.send(results)
     })
 })
+
+app.post('/collection/:collectionName', (request, response, next) => {
+    request.collection.insert(request.body, (error, results) => {
+        if (error) return next(error)
+        response.send(results)
+    })
+})
