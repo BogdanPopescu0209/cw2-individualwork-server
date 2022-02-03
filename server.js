@@ -58,3 +58,37 @@ app.put('/collection/:collectionName/:id', (request, response, next) => {
             response.send(result.acknowledged == true ? {msg: 'success'} : {msg: 'error'})
         })
 })
+
+app.get('/search/:collectionName/:searchItem', (request, response, next) => {
+
+    request.collection.aggregate(
+
+        [{
+            $search: {
+                index: 'autoCompleteProducts',
+                compound: {
+                    should: [
+                        {
+                            "autocomplete": {
+                                query: request.params.searchItem,
+                                path: 'topic',
+                                "tokenOrder": "sequential"
+                            },
+                        },
+                        {
+                            "autocomplete": {
+                                query: request.params.searchItem,
+                                path: 'location',
+                                "tokenOrder": "sequential"
+                            },
+                        },
+                    ],
+                },
+            },
+        }]
+
+    ).toArray((error, results) => {
+        if (error) return next(error)
+        response.send(results)
+    })
+})
