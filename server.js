@@ -92,3 +92,5 @@ app.get('/search/:collectionName/:searchItem', (request, response, next) => {
         response.send(results)
     })
 })
+
+app.listen(8000);
