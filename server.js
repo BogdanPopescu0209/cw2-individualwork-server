@@ -33,3 +33,10 @@ app.use(express.static('public'))
 app.get('/', (request, response, next) => {
     response.send('Welcome to express server!')
 })
+
+app.get('/collection/:collectionName', (request, response, next) => {
+    request.collection.find({}).toArray((error, results) => {
+        if (error) return next(error)
+        response.send(results)
+    })
+})
