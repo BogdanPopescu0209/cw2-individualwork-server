@@ -16,3 +16,8 @@ const mongodbDatabase = 'store';
 MongoClient.connect('mongodb+srv://' + mongodbUser + ':' + mongodbPassword + '@store.8x5cl.mongodb.net/', (error, client) => {
     db = client.db(mongodbDatabase)
 })
+
+app.param('collectionName', (request, response, next, collectionName) => {
+    request.collection = db.collection(collectionName)
+    return next()
+})
