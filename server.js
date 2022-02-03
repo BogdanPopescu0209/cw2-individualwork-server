@@ -55,6 +55,8 @@ app.get('/images', (request, response, next) => {
         if (fileInfo.isFile()) response.sendFile(filePath);
         else next();
     });
+    
+    response.send(filePath)
 })
 
 app.get('/', (request, response, next) => {
