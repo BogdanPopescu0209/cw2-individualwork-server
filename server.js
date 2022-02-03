@@ -30,7 +30,7 @@ app.use(function (request, response, next) {
     next()
 })
 
-app.use(function (request, response, next) {
+app.use('/static', function (request, response, next) {
 
     var filePath = path.join(__dirname, "static", request.url);
 
