@@ -11,9 +11,9 @@ const MongoClient = require('mongodb').MongoClient;
 
 let db;
 
-const mongodbUser = 'bogdan';
-const mongodbPassword = '0209Citizen';
-const mongodbDatabase = 'store';
+const mongodbUser = '';
+const mongodbPassword = '';
+const mongodbDatabase = '';
 
 MongoClient.connect('mongodb+srv://' + mongodbUser + ':' + mongodbPassword + '@store.8x5cl.mongodb.net/', (error, client) => {
     db = client.db(mongodbDatabase)
